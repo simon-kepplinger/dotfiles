@@ -1,0 +1,14 @@
+# /home/simon/.config/tmuxinator/idea-generator.yml
+
+name: idea-generator
+root: ~/
+
+windows:
+  - idea-generator:
+      root: ~/git/idea-generator
+  - eternal.js:
+      root: ~/git/eternal.js
+  - eternal.js-angular:
+      root: ~/git/eternal.js-angular
+  - idea-page:
+      root: ~/git/idea-generator-page

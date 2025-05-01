@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 STOW_ROOT="$HOME/dotfiles"
-DEFAULT_DIRS="nvim,tmux"
+DEFAULT_DIRS="nvim,tmux,tmuxinator"
 
 if [[ -z $STOW_DIRS ]]; then
     STOW_DIRS="$DEFAULT_DIRS"

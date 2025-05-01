@@ -1,0 +1,14 @@
+# /home/simon/.config/tmuxinator/ng-live.yml
+
+name: ng-live
+root: ~/
+
+windows:
+  - ng-live:
+      root: ~/git/ng-live-suite
+  - ts-live-server: 
+      root: ~/git/ts-live-server
+  - ts-live-shared: 
+      root: ~/git/ts-live-shared
+  - saleor:
+      root: ~/git/saleor
