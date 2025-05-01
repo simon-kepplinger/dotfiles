@@ -1,0 +1,7 @@
+repos:
+  # scan for secrets
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.25.1
+    hooks: 
+      - id: gitleaks 
+        stages: [pre-commit, pre-push]
