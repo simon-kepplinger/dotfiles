@@ -35,3 +35,13 @@ Run the hooks on demand:
 ```bash
 pre-commit run --all-files
 ```
+
+## Notes on zsh
+My current zsh setup is very simple. It does not yet include an automatic setup for:
+- `oh-my-zsh`
+- `powerlevel10k`
+- `fzf`
+- `nvm`
+- _(and possibly more)_
+
+I may add support for these tools in the future.
