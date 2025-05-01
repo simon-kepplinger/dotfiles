@@ -1,0 +1,16 @@
+theme = catppuccin-mocha
+gtk-titlebar = false
+
+background = #000000
+
+font-family = "MesloLGS NF"
+font-size = 12.75
+
+window-padding-x = 16
+window-padding-y = 16
+
+cursor-style = block
+cursor-invert-fg-bg = true
+shell-integration-features = no-cursor
+
+clipboard-paste-protection = false
