@@ -1,5 +1,5 @@
-## Automatically attach to the default tmux session (or create it)
+# automatically attach to the default tmux session (or create it)
 if [[ -o interactive ]] && [[ -z "$TMUX" ]]; then
-  tmux new-session -A -s default
+    exec tmux new-session -A -s _default
 fi
 
