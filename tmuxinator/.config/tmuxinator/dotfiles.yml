@@ -1,0 +1,7 @@
+# /home/simon/.config/tmuxinator/dotfiles.yml
+
+name: dotfiles
+root: ~/dotfiles
+
+windows:
+  - dotfiles:
