@@ -1,0 +1,7 @@
+# /home/simon/.config/tmuxinator/company-data.yml
+
+name: company-data
+root: ~/git/company-data
+
+windows:
+  - company-data:
