@@ -17,6 +17,7 @@ export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
 # java
 export JAVA_HOME="$HOME/.jdks/openjdk-21.0.1"
+export PATH=$JAVA_HOME/bin:$PATH
 
 # chrome
 export CHROME_BIN=/usr/bin/chromium-browser

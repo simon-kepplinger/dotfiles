@@ -5,3 +5,5 @@ root: ~/git/company-data
 
 windows:
   - company-data:
+  - importer:
+      root: ~/git/company-data/importer
