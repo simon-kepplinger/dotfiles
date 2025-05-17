@@ -22,7 +22,4 @@ vim.opt.updatetime = 250
 
 vim.opt.colorcolumn = "80"
 
-vim.opt.clipboard = "unnamedplus"
-
-vim.opt.laststatus = 3
 vim.o.winborder = "rounded"
