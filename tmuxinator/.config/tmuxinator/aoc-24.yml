@@ -1,0 +1,6 @@
+name: aoc-24
+project_root: "~/git/advent-of-code-2024"
+
+windows:
+  - aoc:
+      root: ~/git/advent-of-code-2024
