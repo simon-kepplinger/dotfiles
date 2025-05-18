@@ -19,10 +19,6 @@ vim.keymap.set("n", "y", '"+y')
 vim.keymap.set("v", "y", '"+y')
 vim.keymap.set("n", "Y", '"+Y')
 
-vim.keymap.set("n", "p", '"+p')
-vim.keymap.set("v", "p", '"+p')
-vim.keymap.set("n", "P", '"+P')
-
 -- basic diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("n", "<leader>di", vim.diagnostic.open_float, { desc = "Open [D]iagnostics [I]nfo" })
