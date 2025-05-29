@@ -1,13 +1,17 @@
 return {
 	"williamboman/mason.nvim",
+
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		"jay-babu/mason-nvim-dap.nvim",
 	},
+
 	config = function()
 		local mason = require("mason")
 		local mason_lspconfig = require("mason-lspconfig")
 		local mason_tool_installer = require("mason-tool-installer")
+		local mason_dap = require("mason-nvim-dap")
 
 		mason.setup({ ui = { border = "rounded" } })
 
@@ -36,6 +40,13 @@ return {
 				"pylint",
 				"eslint_d",
 			},
+		})
+
+		mason_dap.setup({
+			ensure_installed = {
+				"codelldb",
+			},
+			handlers = {},
 		})
 	end,
 }
