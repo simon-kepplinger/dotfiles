@@ -20,14 +20,15 @@ return {
 			local telescope = require("telescope.builtin")
 			local mappings = {
 				{ "gd", telescope.lsp_definitions, "[G]oto [D]efinition" },
+				{ "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration" },
 				{ "gr", telescope.lsp_references, "[G]oto [R]eferences" },
 				{ "gI", telescope.lsp_implementations, "[G]oto [I]mplementation" },
+				{ "<leader>sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp" },
 				{ "<leader>D", telescope.lsp_type_definitions, "Type [D]efinition" },
 				{ "<leader>ds", telescope.lsp_document_symbols, "[D]ocument [S]ymbols" },
 				{ "<leader>ws", telescope.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols" },
 				{ "<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame" },
 				{ "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" } },
-				{ "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration" },
 			}
 
 			for _, m in ipairs(mappings) do
