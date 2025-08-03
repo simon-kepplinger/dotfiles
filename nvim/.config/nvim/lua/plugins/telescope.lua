@@ -1,4 +1,5 @@
 local builtin = require("telescope.builtin")
+local actions = require("telescope.actions")
 
 return {
 	"nvim-telescope/telescope.nvim",
@@ -8,6 +9,16 @@ return {
 	opts = {
 		defaults = {
 			file_ignore_patterns = { "node_modules", ".git" },
+			mappings = {
+				i = {
+					["<C-j>"] = actions.move_selection_next,
+					["<C-k>"] = actions.move_selection_previous,
+				},
+				n = {
+					["<C-j>"] = actions.move_selection_next,
+					["<C-k>"] = actions.move_selection_previous,
+				},
+			},
 		},
 		pickers = {
 			find_files = { hidden = true },

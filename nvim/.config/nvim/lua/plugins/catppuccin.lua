@@ -10,7 +10,7 @@ return {
 			mocha = {
 				base = "#000000",
 				mantle = "#000000",
-				crust = "#1e1e2e",
+				crust = "#101020",
 			},
 		},
 		custom_highlights = function(colors)
