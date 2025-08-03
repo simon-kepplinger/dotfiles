@@ -1,0 +1,8 @@
+# /home/simon/.config/tmuxinator/ng-live.yml
+
+name: valcome-webpage
+root: ~/
+
+windows:
+  - valcome-webpage:
+      root: ~/git/valcome-webpage
