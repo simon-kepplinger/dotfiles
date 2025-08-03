@@ -10,12 +10,13 @@ return {
 			mocha = {
 				base = "#000000",
 				mantle = "#000000",
-				crust = "#000000",
+				crust = "#1e1e2e",
 			},
 		},
 		custom_highlights = function(colors)
 			return {
 				WinSeparator = { fg = colors.blue },
+				CursorLine = { bg = colors.crust },
 			}
 		end,
 		default_integrations = true,
