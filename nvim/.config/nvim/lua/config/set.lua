@@ -23,4 +23,9 @@ vim.opt.updatetime = 250
 
 vim.opt.colorcolumn = "81"
 
-vim.o.winborder = "rounded"
+vim.opt.winborder = "rounded"
+
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+vim.opt.laststatus = 3
