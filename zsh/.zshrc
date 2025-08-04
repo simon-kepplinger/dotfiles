@@ -2,4 +2,3 @@
 for script ($HOME/.zshrc.d/*.zsh(N)); do
     source "$script"
 done
-
