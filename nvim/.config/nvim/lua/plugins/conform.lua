@@ -1,47 +1,64 @@
--- autoformat
-
 return {
-	"stevearc/conform.nvim",
-	event = { "BufWritePre" },
-	cmd = { "ConformInfo" },
+  'stevearc/conform.nvim',
+  event = { 'BufWritePre' },
+  cmd = { 'ConformInfo' },
 
-	keys = {
-		{
-			"<leader>cf",
-			function()
-				require("conform").format({ async = true, lsp_format = "fallback" })
-			end,
-			mode = "",
-			desc = "[C]ode [F]ormat",
-		},
-	},
+  keys = {
+    {
+      '<leader>cf',
+      function()
+        require('conform').format({ async = true, lsp_format = 'fallback' })
+      end,
+      mode = '',
+      desc = '[C]ode [F]ormat',
+    },
+  },
 
-	opts = {
-		notify_on_error = false,
-		format_on_save = function(bufnr)
-			-- Disable "format_on_save lsp_fallback" for languages that don't
-			-- have a well standardized coding style. You can add additional
-			-- languages here or re-enable it for the disabled ones.
-			local disable_filetypes = { c = true, cpp = true }
-			local lsp_format_opt
-			if disable_filetypes[vim.bo[bufnr].filetype] then
-				lsp_format_opt = "never"
-			else
-				lsp_format_opt = "fallback"
-			end
-			return {
-				timeout_ms = 500,
-				lsp_format = lsp_format_opt,
-			}
-		end,
-		formatters_by_ft = {
-			lua = { "stylua" },
-			sh = { "shfmt" },
-			-- Conform can also run multiple formatters sequentially
-			-- python = { "isort", "black" },
-			--
-			-- You can use 'stop_after_first' to run the first available formatter from the list
-			-- javascript = { "prettierd", "prettier", stop_after_first = true },
-		},
-	},
+  opts = {
+    notify_on_error = false,
+    format_on_save = {
+      timeout_ms = 1000,
+      lsp_format = true,
+    },
+
+    formatters_by_ft = {
+      lua = { 'stylua' },
+      sh = { 'shfmt' },
+
+      javascript = { 'biome' },
+      typescript = { 'biome' },
+      json = { 'biome' },
+      jsonc = { 'biome' },
+
+      markdown = { 'prettierd', 'prettier', stop_after_first = true },
+      html = { 'prettierd', 'prettier', stop_after_first = true },
+      htmlangular = { 'prettierd', 'prettier', stop_after_first = true },
+      css = { 'prettierd', 'prettier', stop_after_first = true },
+    },
+
+    -- load configs dynamically from `config.formatter-configs/*`
+    formatters = (function()
+      local prefix = 'config.formatter-configs'
+      local files = vim.fn.globpath(
+        vim.o.runtimepath,
+        'lua/config/formatter-configs/*.lua',
+        true,
+        true
+      )
+
+      local t = {}
+      for _, f in ipairs(files) do
+        local name = vim.fn.fnamemodify(f, ':t:r')
+
+        if name then
+          local ok, cfg = pcall(require, prefix .. '.' .. name)
+          if ok then
+            t[name] = cfg
+          end
+        end
+      end
+
+      return t
+    end)(),
+  },
 }
