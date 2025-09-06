@@ -2,7 +2,7 @@ vim.opt.nu = true
 vim.opt.relativenumber = true
 
 vim.opt.cursorline = true
-vim.opt.cursorlineopt = "both"
+vim.opt.cursorlineopt = 'both'
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -21,9 +21,9 @@ vim.opt.scrolloff = 8
 
 vim.opt.updatetime = 250
 
-vim.opt.colorcolumn = "81"
+vim.opt.colorcolumn = '81'
 
-vim.opt.winborder = "rounded"
+vim.opt.winborder = 'rounded'
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
