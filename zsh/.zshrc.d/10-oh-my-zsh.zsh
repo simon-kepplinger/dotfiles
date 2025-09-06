@@ -8,6 +8,9 @@ plugins=(
   zsh-vi-mode
 )
 
+# init zsh-vi-mode instantly https://stackoverflow.com/a/77204401/12237560
+ZVM_INIT_MODE=sourcing
+
 source "$ZSH/oh-my-zsh.sh"
 
 # p10k theme (after OMZ so its functions exist)
