@@ -1,3 +1,6 @@
+# setup bat
+export BAT_THEME=ansi
+
 # setup fzf 
 [ -f ~/.fzf.zsh ] && source "$HOME/.fzf.zsh"
 source <(fzf --zsh)

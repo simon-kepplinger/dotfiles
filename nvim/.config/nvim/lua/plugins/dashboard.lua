@@ -19,7 +19,14 @@ return {
         header = vim.split(logo, '\n', { trimempty = true }),
         footer = {},
         shortcut = {
-          { icon = ' ', desc = 'Files [<leader>y]', group = 'Label' },
+          { icon = ' ', desc = 'Files [<leader>y]', group = 'Label' },
+          {
+            icon = '󰈔 ',
+            desc = 'New file',
+            key = 'n',
+            action = 'enew',
+            group = 'Label',
+          },
           { icon = ' ', desc = 'Find [<leader>ff]', group = 'Label' },
           { icon = ' ', desc = 'Grep [<leader>fg]', group = 'Label' },
         },

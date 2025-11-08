@@ -25,3 +25,6 @@ export CHROME_BIN=/usr/bin/chromium-browser
 # dprint
 export DPRINT_INSTALL="/home/simon/.dprint"
 export PATH="$DPRINT_INSTALL/bin:$PATH"
+
+# zig
+export PATH="$PATH:$HOME/zig"
