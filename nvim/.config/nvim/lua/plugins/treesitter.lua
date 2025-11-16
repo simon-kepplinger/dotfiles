@@ -6,7 +6,6 @@ return {
     ensure_installed = {
       'vim',
       'vimdoc',
-      'help',
       'query',
       'bash',
       'lua',
@@ -23,8 +22,9 @@ return {
     indent = { enable = true },
     ignore_install = {},
     modules = {},
-    config = function(_, opts)
-      require('nvim-treesitter.configs').setup(opts)
-    end,
   },
+
+  config = function(_, opts)
+    require('nvim-treesitter.configs').setup(opts)
+  end,
 }
