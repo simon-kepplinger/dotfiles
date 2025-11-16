@@ -1,5 +1,5 @@
 local palette = require('config.theme.palette')
-local custom_highlights = require('config.theme.syntax-highlight')
+local syntax_highlights = require('config.theme.syntax')
 
 return {
   'catppuccin/nvim',
@@ -12,16 +12,7 @@ return {
     color_overrides = {
       mocha = palette,
     },
-    custom_highlights = function(colors)
-      return {
-        WinSeparator = { fg = colors.blue },
-        CursorLine = { bg = colors.crust },
-        ['@keyword.modifier.typescript'] = { fg = colors.teal, style = {} }, -- e.g. public, private, readonly
-        ['@lsp.type.keyword.modifier'] = { fg = colors.teal, style = {} }, -- e.g. public, private, readonly
-        ['@keyword.modifier'] = { fg = colors.teal, style = {} }, -- e.g. public, private, readonly
-        Keyword = { fg = colors.teal, style = {} }, -- e.g. public, private, readonly
-      }
-    end,
+    custom_highlights = syntax_highlights,
     default_integrations = true,
     integrations = {
       cmp = true,
@@ -33,6 +24,5 @@ return {
   config = function(_, opts)
     require('catppuccin').setup(opts)
     vim.cmd.colorscheme('catppuccin')
-    vim.api.nvim_set_hl(0, '@keyword.modifier', { fg = '#14b8a6' }) -- sample teal hex
   end,
 }
