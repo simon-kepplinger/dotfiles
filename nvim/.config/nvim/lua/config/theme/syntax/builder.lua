@@ -108,7 +108,7 @@ return function(key, c, theme)
     ['@keyword.modifier'] = keyword,
     ['@keyword.type'] = keyword,
     ['@keyword.coroutine'] = keyword,
-    ['@keyword.function'] = func,
+    ['@keyword.function'] = keyword,
     ['@keyword.operator'] = operator,
     ['@keyword.import'] = include,
     ['@keyword.repeat'] = repeat_hl,

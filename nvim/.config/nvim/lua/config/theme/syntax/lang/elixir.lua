@@ -1,21 +1,21 @@
 local build_syntax = require('config.theme.syntax.builder')
 local with_suffix = require('util.suffix')
 
--- TODO finish color schema
 return function(c)
   local key = '.elixir'
 
-  local purple = '#9084ff'
-  local teal = '#8fc7ff'
+  local purple = '#8F83FF'
+  local light_blue = '#8fc7ff'
 
   return vim.tbl_extend(
     'force',
     build_syntax(key, c, {
       keyword = { fg = purple },
-      ['function'] = { fg = teal },
+      ['function'] = { fg = light_blue },
     }),
     with_suffix(key, {
-      ['@module'] = { fg = c.text },
+      ['@module'] = { fg = c.teal },
+      ['@string.special.symbol'] = { fg = c.yellow }, -- atoms
     })
   )
 end
