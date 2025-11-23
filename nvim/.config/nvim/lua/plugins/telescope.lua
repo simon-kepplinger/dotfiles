@@ -52,5 +52,10 @@ return {
       builtin.buffers,
       desc = 'Find Buffers',
     },
+    {
+      '<leader>fk',
+      builtin.keymaps,
+      desc = 'Find Keymaps',
+    },
   },
 }
