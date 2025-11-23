@@ -47,6 +47,11 @@ return {
           '[C]ode [A]ction',
           { 'n', 'x' },
         },
+        {
+          '<leader>cl',
+          vim.lsp.codelens.run,
+          '[C]ode [L]ens',
+        },
       }
 
       for _, m in ipairs(mappings) do
@@ -78,6 +83,32 @@ return {
             callback = vim.lsp.buf.clear_references,
           }
         )
+      end
+
+      -- setup code lense (disable per default)
+      if client.supports_method('textDocument/codeLens') then
+        vim.b.codelens_enabled = true
+
+        -- Auto-refresh (but only when enabled)
+        vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+          buffer = bufnr,
+          callback = function()
+            if vim.b.codelens_enabled then
+              vim.lsp.codelens.refresh()
+            end
+          end,
+        })
+
+        -- Toggle keymap, e.g. <leader>cl
+        vim.keymap.set('n', '<leader>tcl', function()
+          if vim.b.codelens_enabled then
+            vim.b.codelens_enabled = false
+            vim.lsp.codelens.clear() -- hides existing lenses
+          else
+            vim.b.codelens_enabled = true
+            vim.lsp.codelens.refresh() -- shows them again
+          end
+        end, { buffer = bufnr, desc = '[T]oggle LSP [C]ode[L]ens' })
       end
     end
 
