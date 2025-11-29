@@ -34,3 +34,6 @@ source "$HOME/.local/lib/erlang/28.0/activate"
 
 # elixir
 export PATH="$PATH:$HOME/opt/elixir/bin"
+
+# make sure MANPATH is set (was overriden by erlang)
+export MANPATH="/usr/share/man:/usr/local/share/man:$MANPATH:"
