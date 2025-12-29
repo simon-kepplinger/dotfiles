@@ -87,7 +87,7 @@ return {
 
       -- setup code lense (disable per default)
       if client.supports_method('textDocument/codeLens') then
-        vim.b.codelens_enabled = true
+        vim.b.codelens_enabled = false
 
         -- Auto-refresh (but only when enabled)
         vim.api.nvim_create_autocmd({ 'BufWritePost' }, {

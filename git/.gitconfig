@@ -1,0 +1,29 @@
+[user]
+  name = Simon Kepplinger
+  email = simon.kepplinger@valcome.at
+
+[init]
+  defaultBranch = main
+
+[core]
+  pager = delta-auto
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+
+  # enables support for Git's moved-line coloring.
+  inspect-raw-lines = true
+
+  file-decoration-style = blue box
+  hunk-header-decoration-style = blue ul
+
+[diff]
+  # enable Git's moved-line coloring; delta understands it
+  colorMoved = default
+
+[merge]
+  # better merge conflict markers (delta formats these nicely)
+  conflictStyle = zdiff3

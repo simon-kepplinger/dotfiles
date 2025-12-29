@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+MIN_COLS=120
+
+get_cols() {
+  # Works even when stdin is a pipe (as it is for git pagers)
+  if [[ -r /dev/tty ]]; then
+    stty size </dev/tty 2>/dev/null | awk '{print $2}' && return 0
+  fi
+  echo "${COLUMNS:-80}"
+}
+
+cols="$(get_cols)"
+
+if [[ "$cols" -ge "$MIN_COLS" ]]; then
+  exec delta --side-by-side "$@"
+else
+  exec delta "$@"
+fi
