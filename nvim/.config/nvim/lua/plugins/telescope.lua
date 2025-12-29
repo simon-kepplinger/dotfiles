@@ -3,12 +3,12 @@ local actions = require('telescope.actions')
 
 return {
   'nvim-telescope/telescope.nvim',
-  tag = '0.1.8',
+  tag = 'v0.2.0',
   dependencies = { 'nvim-lua/plenary.nvim' },
 
   opts = {
     defaults = {
-      file_ignore_patterns = { 'node_modules', '.git' },
+      file_ignore_patterns = { 'node_modules', '%.git' },
       mappings = {
         i = {
           ['<C-j>'] = actions.move_selection_next,
