@@ -12,7 +12,7 @@ vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- paste without loosing
-vim.keymap.set('x', '<leader>p', '"_dP')
+vim.keymap.set('x', 'p', '"_dP')
 
 -- use system clipboard
 vim.keymap.set('n', 'y', '"+y')
