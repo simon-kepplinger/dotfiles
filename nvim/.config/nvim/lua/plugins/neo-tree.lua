@@ -48,6 +48,23 @@ return {
           ['<esc>'] = 'close_window',
           ['v'] = 'open_rightbelow_vs',
           ['s'] = 'open_split',
+          ['h'] = 'close_node',
+          ['l'] = function(state)
+            local node = state.tree:get_node()
+            if not node then
+              return
+            end
+
+            if
+              node.type == 'directory'
+              and not (node:is_expanded() or node.empty_expanded)
+            then
+              state.commands.toggle_node(state)
+              return
+            end
+
+            vim.cmd('normal! j')
+          end,
         },
       },
 
