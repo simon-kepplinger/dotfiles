@@ -2,7 +2,7 @@ return {
   rosewater = '#8fbcbb',
   flamingo = '#88c0d0',
   pink = '#81a1c1',
-  mauve = '#d08770',
+  mauve = '#ff929d',
   red = '#fb6f90',
   maroon = '#f17c8e',
   peach = '#ffa46a',
