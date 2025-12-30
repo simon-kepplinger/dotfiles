@@ -23,7 +23,3 @@
 [diff]
   # enable Git's moved-line coloring; delta understands it
   colorMoved = default
-
-[merge]
-  # better merge conflict markers (delta formats these nicely)
-  conflictStyle = zdiff3

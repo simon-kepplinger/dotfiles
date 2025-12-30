@@ -7,6 +7,7 @@ return {
       'MunifTanjim/nui.nvim',
       'nvim-tree/nvim-web-devicons',
     },
+    lazy = false,
 
     opts = {
       popup_border_style = 'rounded',
@@ -33,6 +34,7 @@ return {
       },
 
       filesystem = {
+        hijack_netrw_behavior = 'disabled',
         filtered_items = {
           visible = true,
           hide_dotfiles = false,
