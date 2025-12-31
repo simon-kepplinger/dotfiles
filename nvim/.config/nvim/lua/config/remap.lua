@@ -1,3 +1,5 @@
+local smart_close = require('config.cmd').smart_close
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -19,16 +21,24 @@ vim.keymap.set('n', 'y', '"+y')
 vim.keymap.set('v', 'y', '"+y')
 vim.keymap.set('n', 'Y', '"+Y')
 
+-- smart close window/buffer
+vim.keymap.set(
+  'n',
+  '<leader>q',
+  smart_close,
+  { desc = 'Smart close window/buffer' }
+)
+
 -- basic diagnostic keymaps
 vim.keymap.set(
   'n',
-  '<leader>e',
+  'gl',
   vim.diagnostic.open_float,
   { desc = 'Open floating diagnostic message' }
 )
 vim.keymap.set(
   'n',
-  '<leader>q',
+  'gL',
   vim.diagnostic.setloclist,
   { desc = 'Open diagnostics list' }
 )
