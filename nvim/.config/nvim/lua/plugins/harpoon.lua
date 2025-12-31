@@ -15,11 +15,15 @@ return {
       harpoon:list():add()
     end, { desc = 'Add to harpoon' })
 
-    -- Meta-1 through Meta-4
-    for i = 1, 4 do
+    -- Meta-1 through Meta-9
+    for i = 1, 9 do
       vim.keymap.set('n', '<M-' .. i .. '>', function()
         harpoon:list():select(i)
       end, { desc = 'Select harpoon ' .. i })
+
+      vim.keymap.set('n', '<leader>h' .. i, function()
+        harpoon:list():replace_at(i)
+      end, { desc = 'Set harpoon ' .. i })
     end
   end,
 }
