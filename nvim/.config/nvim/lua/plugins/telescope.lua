@@ -8,7 +8,12 @@ return {
 
   opts = {
     defaults = {
-      file_ignore_patterns = { 'node_modules', '%.git/' },
+      layout_strategy = 'vertical',
+      layout_config = {
+        prompt_position = 'top',
+      },
+      sorting_strategy = 'ascending',
+      file_ignore_patterncs = { 'node_modules', '%.git/' },
       mappings = {
         i = {
           ['<C-j>'] = actions.move_selection_next,
