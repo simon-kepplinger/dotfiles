@@ -10,6 +10,8 @@ return {
     lazy = false,
 
     opts = {
+      sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
+
       popup_border_style = 'rounded',
 
       default_component_configs = {
@@ -46,20 +48,22 @@ return {
 
       window = {
         mappings = {
-          ['-'] = 'close_node',
           ['<esc>'] = 'close_window',
           ['v'] = 'open_rightbelow_vs',
           ['s'] = 'open_split',
           ['h'] = 'close_node',
+          -- expand dir, move into or move over
           ['l'] = function(state)
             local node = state.tree:get_node()
             if not node then
               return
             end
 
+            -- Filesystem dirs can be "lazy": children may not exist until first expand/open.
+            local expandable = (node.type == 'directory') or node:has_children()
+
             if
-              node.type == 'directory'
-              and not (node:is_expanded() or node.empty_expanded)
+              expandable and not (node:is_expanded() or node.empty_expanded)
             then
               state.commands.toggle_node(state)
               return
@@ -67,6 +71,18 @@ return {
 
             vim.cmd('normal! j')
           end,
+        },
+        -- navigate one dir up without closing
+        ['-'] = function(state)
+          local node = state.tree:get_node()
+          local parent_id = node and node:get_parent_id()
+          if parent_id then
+            require('neo-tree.ui.renderer').focus_node(state, parent_id)
+          end
+        end,
+
+        fuzzy_finder_mappings = {
+          ['<CR>'] = 'close_keep_filter',
         },
       },
 
@@ -77,6 +93,28 @@ return {
           handler = function()
             vim.opt_local.number = true
             vim.opt_local.relativenumber = true
+          end,
+        },
+        -- clear filter between "sessions"
+        {
+          event = 'neo_tree_window_before_close',
+          handler = function(args)
+            -- only when the filesystem float closes ("session" ends)
+            if args.source ~= 'filesystem' or args.position ~= 'float' then
+              return
+            end
+
+            vim.schedule(function()
+              local state =
+                require('neo-tree.sources.manager').get_state('filesystem')
+              if state and state.search_pattern then
+                -- IMPORTANT: refresh=false so it can't reopen the window
+                require('neo-tree.sources.filesystem').reset_search(
+                  state,
+                  false
+                )
+              end
+            end)
           end,
         },
       },
@@ -102,6 +140,19 @@ return {
           require('neo-tree.command').execute({
             action = 'focus',
             source = 'buffers',
+            position = 'float',
+            toggle = true,
+            reveal = true,
+          })
+        end,
+        desc = 'Buffers (neo-tree)',
+      },
+      {
+        '<leader>ss',
+        function()
+          require('neo-tree.command').execute({
+            action = 'focus',
+            source = 'document_symbols',
             position = 'float',
             toggle = true,
             reveal = true,
