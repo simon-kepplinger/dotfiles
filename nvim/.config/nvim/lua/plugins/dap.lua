@@ -1,3 +1,5 @@
+local palette = require('config.theme.palette')
+
 return {
   'mfussenegger/nvim-dap',
   event = 'VeryLazy',
@@ -12,38 +14,7 @@ return {
     local dap = require('dap')
     local dap_ui = require('dapui')
     local dap_virtual_text = require('nvim-dap-virtual-text')
-
-    -- Rust DAP
-    dap.configurations.rust = {
-      {
-        name = 'Debug',
-        type = 'codelldb',
-        request = 'launch',
-
-        program = function()
-          vim.fn.jobstart('cargo build', { detach = false })
-          return vim.fn.getcwd()
-            .. '/target/debug/'
-            .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-        end,
-        cwd = '${workspaceFolder}',
-      },
-    }
-
-    dap.configurations.rust = {
-      {
-        name = 'Debug specific bin',
-        type = 'codelldb',
-        request = 'launch',
-
-        program = function()
-          local bin = vim.fn.input('cargo --bin » ', 'my_binary', 'file') -- prompt once
-          vim.fn.jobstart('cargo build --bin ' .. bin, { detach = false }) -- ① compile
-          return vim.fn.getcwd() .. '/target/debug/' .. bin -- ② path
-        end,
-        cwd = '${workspaceFolder}',
-      },
-    }
+    local widgets = require('dap.ui.widgets')
 
     dap_ui.setup()
     dap_virtual_text.setup({})
@@ -62,6 +33,46 @@ return {
       dap_ui.close()
     end
 
+    -- configure elixir
+    local elixir_config = require('config.dap-configs.elixir')
+    dap.adapters[elixir_config.name] = elixir_config.adapter
+    dap.configurations.elixir = elixir_config.configurations
+
+    -- workaround for ElixirLS debugger not supporting exception breakpoints
+    dap.listeners.after.initialize['elixirls_no_exception_bps'] = function(
+      session
+    )
+      -- Your sessions are type = "mix_task" for ElixirLS configs
+      if
+        session.config.type == 'mix_task'
+        and session.capabilities
+        and session.capabilities.exceptionBreakpointFilters
+        and vim.tbl_isempty(session.capabilities.exceptionBreakpointFilters)
+      then
+        session.capabilities.exceptionBreakpointFilters = nil
+      end
+    end
+
+    -- customize visuals
+    vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg = palette.red })
+    vim.api.nvim_set_hl(0, 'DapStoppedLine', { bg = palette.surface0 })
+    vim.api.nvim_set_hl(0, 'DapStopped', { fg = palette.peach })
+
+    vim.fn.sign_define('DapBreakpoint', {
+      text = '●',
+      texthl = 'DapBreakpoint',
+      linehl = '',
+      numhl = '',
+    })
+
+    vim.fn.sign_define('DapStopped', {
+      text = '▶',
+      texthl = 'DapStopped',
+      linehl = 'DapStoppedLine',
+      numhl = 'DapStoppedLine',
+    })
+
+    -- keymaps
     local map = vim.keymap.set
     map(
       'n',
@@ -69,15 +80,20 @@ return {
       dap.toggle_breakpoint,
       { desc = 'DAP toggle breakpoint' }
     )
-    map('n', '<leader>dc', dap.continue, { desc = 'DAP continue / start' })
+    map('n', '<F6>', dap.continue, { desc = 'DAP continue / start' })
+    map('n', '<F7>', dap.step_into, { desc = 'DAP step into' })
+    map('n', '<F8>', dap.step_over, { desc = 'DAP next step / step over' })
+    map('n', '<F9>', dap.step_out, { desc = 'DAP step out' })
+    map('n', '<Leader>dr', dap.repl.open, { desc = 'DAP open REPL' })
+
     map(
       'n',
-      '<leader>dn',
-      dap.step_over,
-      { desc = 'DAP next step / step over' }
+      '<leader>dC',
+      dap.clear_breakpoints,
+      { desc = 'DAP clear breakpoints' }
     )
-    map('n', '<leader>di', dap.step_into, { desc = 'DAP step into' })
-    map('n', '<leader>do', dap.step_out, { desc = 'DAP step out' })
-    map('n', '<Leader>dR', require('dap').repl.open, { desc = 'DAP open REPL' })
+
+    map('n', '<leader>du', dap_ui.toggle, { desc = 'DAP UI toggle' })
+    map({ 'n', 'v' }, '<leader>de', widgets.hover, { desc = 'DAP eval/hover' })
   end,
 }

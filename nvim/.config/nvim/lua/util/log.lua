@@ -1,4 +1,4 @@
--- log into ~/cache/nvim/lua-debug.log
+-- log into ~/.cache/nvim/lua-debug.log
 local function log(...)
   local path = vim.fn.stdpath('cache') .. '/lua_debug.log'
   vim.fn.mkdir(vim.fn.fnamemodify(path, ':h'), 'p')
