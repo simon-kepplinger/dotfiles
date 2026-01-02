@@ -13,7 +13,14 @@ return {
         prompt_position = 'top',
       },
       sorting_strategy = 'ascending',
-      file_ignore_patterncs = { 'node_modules', '%.git/' },
+      file_ignore_patterns = {
+        'node_modules/',
+        '%.git/',
+        '%.github/',
+        '%.angular/',
+        'dist/',
+        'target/',
+      },
       mappings = {
         i = {
           ['<C-j>'] = actions.move_selection_next,
