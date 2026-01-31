@@ -20,6 +20,7 @@ return {
         '%.angular/',
         'dist/',
         'target/',
+        'coverage/',
       },
       mappings = {
         i = {
