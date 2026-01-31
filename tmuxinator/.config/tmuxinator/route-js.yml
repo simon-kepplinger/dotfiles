@@ -1,0 +1,6 @@
+name: route-js
+root: ~/git/route.js
+
+windows:
+  - route.js:
+      root: ~/git/route.js
