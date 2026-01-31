@@ -5,6 +5,9 @@
 [init]
   defaultBranch = main
 
+[pull]
+  rebase = true
+
 [core]
   pager = delta-auto
 
@@ -23,3 +26,13 @@
 [diff]
   # enable Git's moved-line coloring; delta understands it
   colorMoved = default
+
+[merge]
+  tool = diffview
+
+[mergetool]
+  prompt = false
+  keepBackup = false
+
+[mergetool "diffview"]
+  cmd = diffview-mergetool

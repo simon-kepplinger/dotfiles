@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Git sets $MERGED when running `git mergetool` (path to the conflicted file).
+# Diffview can preselect a file with --selected-file=...
+if [[ -n "${MERGED:-}" ]]; then
+  exec nvim -f -n -c "DiffviewOpen --selected-file=${MERGED}"
+else
+  exec nvim -f -n -c "DiffviewOpen"
+fi
+
