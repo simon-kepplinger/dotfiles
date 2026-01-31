@@ -8,6 +8,13 @@ plugins=(
   zsh-vi-mode
 )
 
+# ---- zsh-autosuggestions ----
+# use both history and completion for suggestions
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+# acccept only a single word
+bindkey '^ ' forward-word
+
 # init zsh-vi-mode instantly https://stackoverflow.com/a/77204401/12237560
 ZVM_INIT_MODE=sourcing
 
