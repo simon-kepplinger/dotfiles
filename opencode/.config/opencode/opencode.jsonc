@@ -1,0 +1,59 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "keybinds": {
+    "messages_half_page_up": "ctrl+u",
+    "messages_half_page_down": "ctrl+d",
+    "input_delete_to_line_start": "ctrl+alt+u",
+  },
+
+  "permission": {
+    "webfetch": "allow",
+    "websearch": "allow",
+    "glob": "allow",
+
+    "external_directory": "deny",
+
+    "read": {
+      ".env": "deny",
+      ".env.*": "deny",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "**/*.pem": "deny",
+      "**/*.key": "deny",
+      "**/*id_rsa*": "deny",
+      "**/*id_dsa*": "deny",
+      "**/*id_ecdsa*": "deny",
+      "**/*id_ed25519*": "deny",
+      "**/.ssh/**": "deny",
+      "**/.gnupg/**": "deny",
+      "**/*secret*": "deny",
+      "**/*secret*/**": "deny",
+      "**/*password*": "deny",
+      "**/*password*/**": "deny",
+      "**/*credentials*": "deny",
+      "**/*credentials*/**": "deny",
+      "**/*api*key*": "deny",
+      "**/*api*secret*": "deny",
+      "**/*token*": "deny",
+      "**/*bearer*": "deny",
+      "**/*auth*key*": "deny",
+      "**/*oauth*": "deny",
+      "**/*jwt*": "deny",
+    },
+
+    "edit": {
+      ".git/**": "deny",
+      ".env": "deny",
+      ".env*": "deny",
+      "**/*.pem": "deny",
+      "**/*.key": "deny",
+      "**/secret*": "deny",
+      "**/credentials*": "deny",
+    },
+
+    "bash": {
+      "sudo *": "deny",
+    },
+  },
+}
