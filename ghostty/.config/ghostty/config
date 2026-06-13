@@ -1,6 +1,7 @@
 theme = GitHub Dark High Contrast
 gtk-titlebar = false
 
+background =#181c24
 palette = 1=#ff6d8b
 
 font-family = "MesloLGS NF"
