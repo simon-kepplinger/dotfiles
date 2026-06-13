@@ -1,0 +1,12 @@
+name: saldofit
+root: ~/git/saldofit-app/
+
+windows:
+  - app:
+      root: ~/git/saldofit-app
+  - eternal.js:
+      root: ~/git/eternal.js
+  - eternal.js-angular:
+      root: ~/git/eternal.js-angular
+  - saldofit-accounting-ai:
+      root: ~/git/saldofit-accounting-ai

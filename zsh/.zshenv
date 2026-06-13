@@ -30,7 +30,7 @@ export PATH="$DPRINT_INSTALL/bin:$PATH"
 export PATH="$PATH:$HOME/opt/zig"
 
 # erlang
-source "$HOME/.local/lib/erlang/28.0/activate"
+source "$HOME/.kerl/bin/29/activate"
 
 # elixir
 export PATH="$PATH:$HOME/opt/elixir/bin"
@@ -40,3 +40,10 @@ export MANPATH="/usr/share/man:/usr/local/share/man:$MANPATH:"
 
 # opencode
 export PATH="/home/simon/.opencode/bin:$PATH"
+
+# eternal.js
+export ETERNAL_PROTOS_PATH="/home/simon/git/eternal-protos"
+
+# saldofit
+export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/saldofit/gcp-dev-sa.json"
+

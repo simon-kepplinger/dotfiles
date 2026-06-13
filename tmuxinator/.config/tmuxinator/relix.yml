@@ -1,0 +1,6 @@
+name: relix
+root: ~/git/relix
+
+windows:
+  - relix:
+      root: ~/git/relix

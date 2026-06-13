@@ -1,12 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
 
-  "keybinds": {
-    "messages_half_page_up": "ctrl+u",
-    "messages_half_page_down": "ctrl+d",
-    "input_delete_to_line_start": "ctrl+alt+u",
-  },
-
   "permission": {
     "webfetch": "allow",
     "websearch": "allow",
