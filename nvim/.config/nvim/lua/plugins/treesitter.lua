@@ -31,13 +31,14 @@ return {
         local lang = vim.treesitter.language.get_lang(vim.bo[ev.buf].filetype)
 
         -- auto-install a missing parser on first open (mirrors the old
-        -- `auto_install = true`; runs async, ready from the next open)
+        -- `auto_install = true`; runs async, ready from the next open).
+        -- only attempt real parsers — plugin window filetypes like `incline`
+        -- map to themselves via get_lang() and would otherwise warn.
+        local cfg = require('nvim-treesitter.config')
         if
           lang
-          and not vim.tbl_contains(
-            require('nvim-treesitter.config').get_installed('parsers'),
-            lang
-          )
+          and vim.tbl_contains(cfg.get_available(), lang)
+          and not vim.tbl_contains(cfg.get_installed('parsers'), lang)
         then
           ts.install(lang)
         end

@@ -1,3 +1,4 @@
 /nvim/.config/nvim/lazy-lock.json
 /tmux/.config/tmux/plugins/*/
 *-secrets.zsh
+tmp/
