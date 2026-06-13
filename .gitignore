@@ -2,3 +2,6 @@
 /tmux/.config/tmux/plugins/*/
 *-secrets.zsh
 tmp/
+
+claude/.claude/*
+!claude/.claude/settings.json
