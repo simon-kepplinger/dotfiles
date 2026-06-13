@@ -59,7 +59,7 @@ return {
       end
 
       -- optional inlay-hint toggle
-      if client.supports_method('textDocument/inlayHint') then
+      if client:supports_method('textDocument/inlayHint') then
         map('<leader>th', function()
           local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
           vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
@@ -67,7 +67,7 @@ return {
       end
 
       -- highlight references
-      if client.supports_method('textDocument/documentHighlight') then
+      if client:supports_method('textDocument/documentHighlight') then
         local aug =
           vim.api.nvim_create_augroup('LspHighlight', { clear = false })
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -86,7 +86,7 @@ return {
       end
 
       -- setup code lense (disable per default)
-      if client.supports_method('textDocument/codeLens') then
+      if client:supports_method('textDocument/codeLens') then
         vim.b.codelens_enabled = false
 
         -- Auto-refresh (but only when enabled)

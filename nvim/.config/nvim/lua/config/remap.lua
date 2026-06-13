@@ -21,6 +21,13 @@ vim.keymap.set('n', 'y', '"+y')
 vim.keymap.set('v', 'y', '"+y')
 vim.keymap.set('n', 'Y', '"+Y')
 
+-- special yanks
+vim.keymap.set('n', 'yp', function()
+  local path = vim.fn.expand('%:p:.')
+  vim.fn.setreg('+', path)
+  vim.notify('Copied: ' .. path)
+end, { desc = 'Yank current file path' })
+
 -- smart close window/buffer
 vim.keymap.set(
   'n',
