@@ -20,3 +20,7 @@ eval "$(pyenv init - zsh)"
 
 # gh completions
 eval "$(gh completion -s zsh)"
+
+# Added by flyctl installer
+export FLYCTL_INSTALL="/home/simon/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"

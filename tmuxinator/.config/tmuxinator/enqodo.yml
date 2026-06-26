@@ -1,0 +1,6 @@
+name: enqodo
+root: ~/git/enqodo.com/
+
+windows:
+  - app:
+      root: ~/git/enqodo.com
