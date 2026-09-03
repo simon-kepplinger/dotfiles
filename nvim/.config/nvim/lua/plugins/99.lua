@@ -6,6 +6,7 @@ return {
     _99.setup({
       -- delegate to the Claude Code CLI (default model: claude-sonnet-4-5)
       provider = _99.Providers.ClaudeCodeProvider,
+      model = 'claude-haiku-4-5',
 
       -- auto-load project context files next to the request location
       md_files = { 'AGENT.md' },
@@ -32,6 +33,11 @@ return {
     end, { desc = '99: visual prompt' })
 
     -- stop all in-flight requests
-    vim.keymap.set('n', '<leader>9x', _99.stop_all_requests, { desc = '99: stop' })
+    vim.keymap.set(
+      'n',
+      '<leader>9x',
+      _99.stop_all_requests,
+      { desc = '99: stop' }
+    )
   end,
 }
