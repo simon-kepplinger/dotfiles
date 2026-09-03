@@ -34,6 +34,10 @@ return {
     })
   end,
   init = function()
+    -- keep netrw disabled so it doesn't claim directory buffers
+    vim.g.loaded_netrw = 1
+    vim.g.loaded_netrwPlugin = 1
+
     -- show dahsboard if opened on path
     if vim.fn.argc(-1) == 1 then
       local a = vim.fn.argv(0)
