@@ -39,7 +39,7 @@
       "Write(~/.claude/settings.json)"
     ]
   },
-  "model": "opus",
+  "model": "claude-fable-5-1[1m]",
   "enableAllProjectMcpServers": false,
   "hooks": {
     "PreToolUse": [
@@ -98,11 +98,62 @@
       ]
     }
   },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Working",
+      "Thinking",
+      "Processing",
+      "Analyzing",
+      "Evaluating",
+      "Planning",
+      "Reviewing",
+      "Resolving",
+      "Verifying",
+      "Building",
+      "Compiling",
+      "Executing",
+      "Indexing",
+      "Inspecting",
+      "Refactoring",
+      "Parsing",
+      "Scanning",
+      "Optimizing",
+      "Running bash",
+      "Parsing with awk",
+      "Editing streams with sed",
+      "Searching with grep",
+      "Syncing with rsync",
+      "Tailing the logs",
+      "Reading the man pages",
+      "Checking exit codes",
+      "Following the symlinks",
+      "Resolving dependencies",
+      "Inspecting the process tree",
+      "Watching stdout",
+      "Redirecting stderr",
+      "Setting permissions",
+      "Spawning a subprocess",
+      "Waiting on a child process",
+      "Walking the filesystem",
+      "Sourcing the environment",
+      "Scheduling the job",
+      "Terminating gracefully"
+    ]
+  },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-fable-5-1": {
+      "effortLevel": "xhigh"
+    }
+  },
+  "tui": "default",
   "voice": {
     "enabled": false,
     "mode": "hold"
   },
+  "theme": "custom:blue",
+  "editorMode": "normal",
   "voiceEnabled": false
 }
