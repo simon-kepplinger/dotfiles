@@ -27,3 +27,13 @@ keybind = alt+8=unbind
 keybind = alt+9=unbind
 keybind = alt+0=unbind
 
+# workaround to get ^1 to ^9 working on tmux 3.3a 
+keybind = ctrl+1=csi:27;5;49~
+keybind = ctrl+2=csi:27;5;50~
+keybind = ctrl+3=csi:27;5;51~
+keybind = ctrl+4=csi:27;5;52~
+keybind = ctrl+5=csi:27;5;53~
+keybind = ctrl+6=csi:27;5;54~
+keybind = ctrl+7=csi:27;5;55~
+keybind = ctrl+8=csi:27;5;56~
+keybind = ctrl+9=csi:27;5;57~
