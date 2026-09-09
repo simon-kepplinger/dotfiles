@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+# temps -- system temperature overview as a box-drawing table
+#
+# usage:
+#   temps              one-shot
+#   temps -w [secs]    live view via watch (default: 2s)
+#
+# Reads lm-sensors JSON output. Set NO_COLOR=1 to disable colouring.
+
+set -uo pipefail
+
+if [[ ${1-} == -w || ${1-} == --watch ]]; then
+  self=$(readlink -f "${BASH_SOURCE[0]}")
+  exec watch -tc -n "${2-2}" "$self"
+fi
+
+if ! command -v sensors >/dev/null; then
+  echo "temps: lm-sensors not installed (apt install lm-sensors && sensors-detect)" >&2
+  exit 1
+fi
+
+json=$(sensors -j 2>/dev/null)
+
+# read_temp <chip-prefix> <feature-name>... -> one value per matching chip, newline separated
+read_temp() {
+  local chip=$1
+  shift
+  jq -r --arg chip "$chip" --args '
+    to_entries[]
+    | select(.key | startswith($chip))
+    | .value
+    | to_entries[]
+    | select(.key as $k | $ARGS.positional | index($k))
+    | .value
+    | to_entries[]
+    | select(.key | endswith("_input"))
+    | .value
+  ' <<<"$json" "$@" 2>/dev/null
+}
+
+WARN=70
+CRIT=85
+
+# colorize <number> <text> -- colour <text> by the severity of <number>
+colorize() {
+  local n=$1 text=$2 c
+  if [[ -n ${NO_COLOR-} ]]; then
+    printf '%s' "$text"
+    return
+  fi
+  n=$(printf '%.0f' "$n")
+  if ((n >= CRIT)); then
+    c='1;31' # bold red
+  elif ((n >= WARN)); then
+    c='33' # yellow
+  else
+    c='32' # green
+  fi
+  printf '\033[%sm%s\033[0m' "$c" "$text"
+}
+
+# format <label> <chip-prefix> <feature>... -> appends "label<TAB>value" row
+labels=()
+values=()
+plains=()
+
+add_row() {
+  local label=$1 chip=$2
+  shift 2
+  local raw plain='' pretty='' n text
+  raw=$(read_temp "$chip" "$@")
+  [[ -z $raw ]] && return
+  while read -r n; do
+    [[ -z $n ]] && continue
+    text=$(printf '%.1f°C' "$n")
+    [[ -n $plain ]] && plain+=' / ' && pretty+=' / '
+    plain+=$text
+    pretty+=$(colorize "$n" "$text")
+  done <<<"$raw"
+  labels+=("$label")
+  values+=("$pretty")
+  plains+=("$plain")
+}
+
+add_row "CPU"      k10temp   Tctl Tdie
+add_row "CPU"      coretemp  "Package id 0"
+add_row "GPU"      amdgpu    edge junction
+add_row "GPU"      nouveau   temp1
+add_row "NVMe SSD" nvme      Composite
+add_row "RAM DIMM" spd5118   temp1
+add_row "WiFi"     iwlwifi   temp1
+add_row "Ethernet" r8169     temp1
+add_row "Battery"  BAT0      temp1
+
+if ((${#labels[@]} == 0)); then
+  echo "temps: no known sensors found -- run 'sensors' to see what is available" >&2
+  exit 1
+fi
+
+# widths (bash counts characters, not bytes, in a UTF-8 locale)
+w1=5 w2=4
+for i in "${!labels[@]}"; do
+  ((${#labels[i]} > w1)) && w1=${#labels[i]}
+  ((${#plains[i]} > w2)) && w2=${#plains[i]}
+done
+
+pad() { # pad <string> <target-width> <printed-width>
+  local n=$(($2 - $3))
+  printf '%s%*s' "$1" "$n" ''
+}
+
+rule() { # rule <left> <mid> <right>
+  printf '%s' "$1"
+  printf '─%.0s' $(seq $((w1 + 2)))
+  printf '%s' "$2"
+  printf '─%.0s' $(seq $((w2 + 2)))
+  printf '%s\n' "$3"
+}
+
+rule '┌' '┬' '┐'
+printf '│ %s │ %s │\n' "$(pad 'Thing' $w1 5)" "$(pad 'Temp' $w2 4)"
+for i in "${!labels[@]}"; do
+  rule '├' '┼' '┤'
+  printf '│ %s │ %s │\n' \
+    "$(pad "${labels[i]}" $w1 ${#labels[i]})" \
+    "$(pad "${values[i]}" $w2 ${#plains[i]})"
+done
+rule '└' '┴' '┘'

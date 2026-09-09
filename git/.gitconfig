@@ -6,7 +6,7 @@
   defaultBranch = main
 
 [pull]
-  rebase = true
+	rebase = true
 
 [core]
   pager = delta-auto
